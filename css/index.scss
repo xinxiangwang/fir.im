@@ -1,0 +1,537 @@
+$LOADING_SPREAD_DELAY: 2s;
+$LOADING_SPREAD: .8s;
+$SECTION_ONE_FLY_OUT: 1s;
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+#nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  transition: opacity .5s, color .6s;
+  padding: 18px 0;
+  display: flex;
+  justify-content: space-between;
+  min-height: 44px;
+  line-height: 44px;
+
+  &.white-color {
+    color: white;
+  }
+
+  .navbar-logo {
+    font-size: 24px;
+    padding: 0 15px 0 30px;
+  }
+
+  .bread {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 31px;
+
+    &>i {
+      font-size: 30px;
+    }
+
+    .bread-ul {
+      display: flex;
+      justify-content: space-between;
+
+      &>li {
+        list-style: none;
+
+        a {
+          font-size: 14px;
+          margin: 0 8px;
+          cursor: pointer;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        i {
+          position: relative;
+          display: inline-block;
+          vertical-align: middle;
+          border-color: red;
+          pointer-events: none;
+          margin: 0 12px 7px -1px;
+          font-size: 16px;
+          top: 12px;
+        }
+      }
+    }
+  }
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+main {
+  width: 100vh;
+  height: 100vh;
+
+  section {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    left: 0;
+    top: 100%;
+  }
+
+  // 第一页动画
+  .section-1 {
+    background-color: #FFD200;
+    display: flex;
+
+    &.animate-in {
+      top: 0;
+    }
+
+    .plane-wrapper {
+      position: absolute;
+      left: 100%;
+      align-self: center;
+      transition: all .6s;
+      animation: fly 8s linear infinite alternate;
+      opacity: 0;
+    }
+
+    .plane-wrapper .plane {
+      width: 100%;
+      z-index: 999;
+    }
+
+    .plane-wrapper .propeller {
+      position: absolute;
+      top: 53%;
+      left: 16%;
+      top: 51.7003%;
+      left: 13.1%;
+      display: inline-block;
+      width: 27.424%;
+      height: 14.4474%;
+      transform-origin: center center;
+      animation: rotating .2s linear infinite reverse;
+    }
+
+
+    &.animate-in .plane-wrapper {
+      opacity: 1;
+      left: 50%;
+    }
+
+    &.animate-out .plane-wrapper {
+      opacity: 1;
+      left: 50%;
+      animation: fly-out $SECTION_ONE_FLY_OUT ease-out forwards;
+    }
+
+
+  }
+
+  // 第二页动画
+  .section-2 {
+    display: flex;
+    z-index: 66;
+    .cols {
+      position: relative;
+      flex: 1;
+      transition: transform .6s;
+      transform-style: preserve-3d;
+      perspective: 2500px;
+
+      &:nth-child(1) {
+        transition-delay: 0s;
+        .back {
+          transition-delay: 0s;
+        }
+        .front {
+          transition-delay: 0s;
+
+          .front-1 {
+            top: 0;
+            background-color: #05abbf;
+          }
+
+          .front-2 {
+            background-color: #f8664e;
+          }
+        }
+      }
+
+      &:nth-child(2) {
+        transition-delay: .2s;
+        .back {
+          transition-delay: .2s;
+        }
+        .front {
+          transition-delay: .2s;
+
+          .front-1 {
+            bottom: 0;
+            background-color: #5e5ae2;
+          }
+
+          .front-2 {
+            background-color: #f2ab13;
+          }
+        }
+      }
+
+      &:nth-child(3) {
+        transition-delay: .3s;
+        .back {
+          transition-delay: .3s;
+        }
+        .front {
+          transition-delay: .3s;
+
+          .front-1 {
+            top: 0;
+            background-color: #363b3d;
+          }
+
+          .front-2 {
+            background-color: #8eb131;
+          }
+        }
+      }
+
+      .back,
+      .front {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: all .6s;
+        backface-visibility: hidden;
+      }
+
+      .back {
+        z-index: 98;
+        background-color: #FFD200;
+        transform: rotateY(0);
+      }
+
+      .front {
+        transform: rotateY(-180deg);
+
+        .front-1 {
+          transition: height .4s linear;
+        }
+
+        &>div {
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    &.animate-in {
+
+      .front {
+        transform: rotateY(0);
+      }
+
+      .back {
+        transform: rotateY(180deg);
+      }
+
+      // .cols {
+      //   transform: rotateY(180deg);
+      // }
+    }
+
+    // &.animate-out {
+    //   top: 0;
+
+    //   .front {
+    //     transform: rotateY(-180deg);
+    //   }
+
+    //   .back {
+    //     transform: rotateY(0);
+    //   }
+    // }
+
+    &.animate-out-4 {
+      top: 0;
+      background-color: unset;
+      .cols {
+        transform: translateY(-100%);
+      }
+    }
+    // &.animate-in-4 {
+    //   top: 0;
+    //   background-color: unset;
+    //   .cols {
+    //     transform: translateY(0);
+    //   }
+    // }
+
+    &.toggle-page {
+      .front-1 {
+        height: 0 !important;
+      }
+    }
+  }
+
+  // 第三页动画
+  .section-3 {
+    background-color: #414859;
+  }
+
+  // 第四页动画
+  .section-4 {
+    background-color: #d85245;
+    transition: top .5s, background-color .8s;
+  }
+
+  // 第五页动画
+  .section-5 {
+    background-color: #FFD200;
+    transition: top .5s;
+  }
+
+  &.active-1 {
+    .section-1 {
+      z-index: 99
+    }
+  }
+  &.active-2, &.active-3 {
+    .section-2 {
+      top: 0;
+      z-index: 99
+    }
+  }
+  &.active-2 {
+    .section-2 {
+      background-color: black;
+    }
+  }
+  &.active-3 {
+    .section-2 {
+      background-color: rgba(0,0,0,0);
+    }
+    .section-3 {
+      z-index: 66;
+      top: 0;
+    }
+  }
+
+  &.active-4 {
+    .section-3 {
+      z-index: 99;
+      top: 0;
+    }
+    .section-4 {
+      z-index: 100;
+      top: 100%;
+    }
+  }
+
+  &.active-5 {
+    .section-3 {
+      z-index: 66;
+      top: 0;
+    }
+    .section-4 {
+      z-index: 99;
+      top: 0;
+    }
+    .section-5 {
+      z-index: 100;
+      top: 100%;
+    }
+  }
+
+  &.active-6 {
+    .section-4 {
+      z-index: 66;
+      top: 0;
+    }
+    .section-5 {
+      z-index: 99;
+      top: 0;
+    }
+  }
+
+  // 首页加载盒子
+  .loading {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: 999;
+    background-color: #1B1B1B;
+    display: none;
+
+    // 扩散盒子
+    .spread-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #FFD200;
+
+      .img-box img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    // 扩散动画
+    &.spread {
+      display: block;
+
+      .img-box {
+        animation: hideGif;
+        animation-fill-mode: forwards;
+        animation-delay: $LOADING_SPREAD_DELAY;
+      }
+
+      .spread-box {
+        animation: loading-animation $LOADING_SPREAD linear;
+        animation-delay: $LOADING_SPREAD_DELAY;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+}
+
+@keyframes hideGif {
+  to {
+    width: 0;
+    height: 0;
+  }
+}
+
+@keyframes loading-animation {
+  from {
+    width: 140px;
+    height: 140px;
+  }
+
+  to {
+    width: 200vw;
+    height: 200vw;
+  }
+}
+
+@keyframes fly-out {
+  0% {
+    transform: scale(1) translateX(0);
+  }
+
+  50% {
+    transform: scale(0.7) translateX(100px);
+  }
+
+  100% {
+    transform: scale(0.7) translateX(-2000px);
+  }
+
+  /* from {
+    transform: translateZ(-500px) scale(0.7);
+  }
+  to {
+    left: -200%;
+  } */
+}
+
+@media screen and (max-width: 1279px) and (min-width: 960px) {
+  .plane-wrapper {
+    width: 600px;
+    margin-left: -300px;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .plane-wrapper {
+    width: 480px;
+    margin-left: -240px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .plane-wrapper {
+    width: 680px;
+    margin-left: -340px;
+  }
+}
+
+@media screen and (min-width: 1366px) {
+  .plane-wrapper {
+    width: 780px;
+    margin-left: -390px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .plane-wrapper {
+    width: 800px;
+    margin-left: -400px;
+  }
+}
+
+@media screen and (min-width: 1680px) {
+  .plane-wrapper {
+    width: 1000px;
+    margin-left: -500px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .plane-wrapper {
+    width: 1000px;
+    margin-left: -500px;
+  }
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotate(0) rotateY(-20deg);
+  }
+
+  50% {
+    transform: rotate(180deg) rotateY(-20deg);
+  }
+
+  100% {
+    transform: rotate(360deg) rotateY(-20deg);
+  }
+}
+
+@keyframes fly {
+
+  0%,
+  100%,
+  50% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: translate3d(-6px, -18px, 0);
+  }
+
+  75% {
+    transform: translate3d(6px, 10px, 0);
+  }
+}
