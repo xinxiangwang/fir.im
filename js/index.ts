@@ -3,7 +3,7 @@ import { throttle, pushCode } from './utils.js'
 class Page {
   constructor() {
     this.state = 0
-    this.lastState = -1
+    this.prevState = -1
     this.isAnimation = true
     this.nav = document.querySelector('#nav')
     this.main = document.querySelector('main')
@@ -12,20 +12,20 @@ class Page {
     this.sectionTwo = document.querySelector('.section-2')
     this.changeView()
   }
-  private isAnimation: boolean
+  private isAnimation: boolean // 是否在执行动画，执行期间禁止触发翻页
 
-  private state: number
-  private lastState: number
+  private state: number // 当前状态
+  private prevState: number // 上一次的状态
 
-  private nav: Element | null
-  private loadingBox: Element | null
+  private nav: Element | null // 导航条
+  private loadingBox: Element | null // 初始加载动画
   private sectionOne: Element | null
   private sectionTwo: Element | null
   private main: Element | null
 
   public next() {
     if (this.isAnimation) return
-    this.lastState = this.state
+    this.prevState = this.state
     if (this.state < 6) {
       this.state = this.state + 1
     } else {
@@ -36,7 +36,7 @@ class Page {
 
   public prev() {
     if (this.isAnimation) return
-    this.lastState = this.state
+    this.prevState = this.state
     this.state = this.state - 1 < 1 ? 1 : this.state - 1
     this.changeView()
   }
@@ -81,7 +81,7 @@ class Page {
         this.isAnimation = true
         let wait = 0
         // 2 => 1
-        if (this.lastState === 2) {
+        if (this.prevState === 2) {
           this.sectionTwo?.classList.remove('animate-in')
           wait = 800 // 卡片翻转动画时长
         }
@@ -107,7 +107,7 @@ class Page {
       case 2: // 第二页
         this.clearCode()
         this.isAnimation = true
-        if (this.lastState === 3) {
+        if (this.prevState === 3) {
           // 3 => 2
           this.sectionTwo?.classList.remove('toggle-page')
           this.setMainClass()
@@ -133,7 +133,7 @@ class Page {
       case 3: // 第二页
         this.isAnimation = true
         this.setMainClass()
-        if (this.lastState === 4) {
+        if (this.prevState === 4) {
           this.sectionTwo?.classList.remove('animate-out-4')
         }
         this.sectionTwo?.classList.add('toggle-page')
@@ -143,7 +143,7 @@ class Page {
         break
       case 4: // 第三页
         this.isAnimation = true
-        if (this.lastState === 5) {
+        if (this.prevState === 5) {
           this.setMainClass()
         } else {
           this.sectionTwo?.classList.add('animate-out-4')
