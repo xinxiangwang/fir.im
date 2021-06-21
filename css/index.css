@@ -143,6 +143,33 @@ main .section-1 .plane-wrapper .propeller {
   animation: rotating .2s linear infinite reverse;
 }
 
+main .section-1 .code {
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+  line-height: 1.3;
+  font-weight: 700;
+  opacity: 0;
+}
+
+main .section-1 .code pre {
+  display: inline;
+  font-size: 28px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: 0 0;
+  font-family: 'Roboto Slab','Helvetica Neue',Helvetica,'Hiragino Sans GB',Arial,sans-serif;
+}
+
+main .section-1 .code span {
+  border: 1px solid black;
+  margin-left: 4px;
+  font-size: 24px;
+  -webkit-animation: flashing .4s linear infinite forwards;
+          animation: flashing .4s linear infinite forwards;
+}
+
 main .section-1.animate-in .plane-wrapper {
   opacity: 1;
   left: 50%;
@@ -332,6 +359,15 @@ main.active-1 .section-1 {
   z-index: 99;
 }
 
+main.active-1 .section-1 .code {
+  opacity: 1;
+}
+
+main.active-1 .section-2 {
+  top: 0;
+  z-index: 66;
+}
+
 main.active-2 .section-2, main.active-3 .section-2 {
   top: 0;
   z-index: 99;
@@ -433,6 +469,24 @@ main .loading.spread .spread-box {
           animation-delay: 2s;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes flashing {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes flashing {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes hideGif {

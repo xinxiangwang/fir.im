@@ -22,3 +22,12 @@ export function throttle(fn, wait, immediate = false) {
         }
     };
 }
+export function pushCode(dom, code, speedTime) {
+    let i = 0;
+    let timer = setInterval(() => {
+        dom.innerHTML += code[i++];
+        if (i === code.length) {
+            clearInterval(timer);
+        }
+    }, speedTime);
+}
