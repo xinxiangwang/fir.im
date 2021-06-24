@@ -30,4 +30,5 @@ export function pushCode(dom, code, speedTime) {
             clearInterval(timer);
         }
     }, speedTime);
+    return timer;
 }

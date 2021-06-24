@@ -5,6 +5,7 @@ class Page {
     this.state = 0
     this.prevState = -1
     this.isAnimation = true
+    this.pushCodeTimer = null
     this.nav = document.querySelector('#nav')
     this.main = document.querySelector('main')
     this.loadingBox = document.querySelector('.loading')
@@ -22,6 +23,8 @@ class Page {
   private sectionOne: Element | null
   private sectionTwo: Element | null
   private main: Element | null
+
+  private pushCodeTimer: number | null
 
   public next() {
     if (this.isAnimation) return
@@ -56,7 +59,7 @@ class Page {
     const dom = document.querySelector('.code > pre')
     if (dom) {
       setTimeout(() => {
-        pushCode(dom, code, 80)
+        this.pushCodeTimer = pushCode(dom, code, 80)
       }, wait)
     }
   }
@@ -64,6 +67,7 @@ class Page {
   private clearCode() {
     const dom = document.querySelector('.code > pre')
     if (dom) {
+      this.pushCodeTimer && clearInterval(this.pushCodeTimer)
       dom.innerHTML = ''
     }
   }

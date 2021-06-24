@@ -2,8 +2,9 @@ import { throttle, pushCode } from './utils.js';
 class Page {
     constructor() {
         this.state = 0;
-        this.lastState = -1;
+        this.prevState = -1;
         this.isAnimation = true;
+        this.pushCodeTimer = null;
         this.nav = document.querySelector('#nav');
         this.main = document.querySelector('main');
         this.loadingBox = document.querySelector('.loading');
@@ -14,7 +15,7 @@ class Page {
     next() {
         if (this.isAnimation)
             return;
-        this.lastState = this.state;
+        this.prevState = this.state;
         if (this.state < 6) {
             this.state = this.state + 1;
         }
@@ -26,7 +27,7 @@ class Page {
     prev() {
         if (this.isAnimation)
             return;
-        this.lastState = this.state;
+        this.prevState = this.state;
         this.state = this.state - 1 < 1 ? 1 : this.state - 1;
         this.changeView();
     }
@@ -43,13 +44,14 @@ class Page {
         const dom = document.querySelector('.code > pre');
         if (dom) {
             setTimeout(() => {
-                pushCode(dom, code, 80);
+                this.pushCodeTimer = pushCode(dom, code, 80);
             }, wait);
         }
     }
     clearCode() {
         const dom = document.querySelector('.code > pre');
         if (dom) {
+            this.pushCodeTimer && clearInterval(this.pushCodeTimer);
             dom.innerHTML = '';
         }
     }
@@ -67,7 +69,7 @@ class Page {
                 this.isAnimation = true;
                 let wait = 0;
                 // 2 => 1
-                if (this.lastState === 2) {
+                if (this.prevState === 2) {
                     (_b = this.sectionTwo) === null || _b === void 0 ? void 0 : _b.classList.remove('animate-in');
                     wait = 800; // 卡片翻转动画时长
                 }
@@ -92,7 +94,7 @@ class Page {
             case 2: // 第二页
                 this.clearCode();
                 this.isAnimation = true;
-                if (this.lastState === 3) {
+                if (this.prevState === 3) {
                     // 3 => 2
                     (_c = this.sectionTwo) === null || _c === void 0 ? void 0 : _c.classList.remove('toggle-page');
                     this.setMainClass();
@@ -117,7 +119,7 @@ class Page {
             case 3: // 第二页
                 this.isAnimation = true;
                 this.setMainClass();
-                if (this.lastState === 4) {
+                if (this.prevState === 4) {
                     (_e = this.sectionTwo) === null || _e === void 0 ? void 0 : _e.classList.remove('animate-out-4');
                 }
                 (_f = this.sectionTwo) === null || _f === void 0 ? void 0 : _f.classList.add('toggle-page');
@@ -127,7 +129,7 @@ class Page {
                 break;
             case 4: // 第三页
                 this.isAnimation = true;
-                if (this.lastState === 5) {
+                if (this.prevState === 5) {
                     this.setMainClass();
                 }
                 else {

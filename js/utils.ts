@@ -21,7 +21,7 @@ export function throttle(fn: any, wait: number, immediate: boolean = false): () 
   }
 }
 
-export function pushCode(dom: Element, code: Array<string>, speedTime: number):void {
+export function pushCode(dom: Element, code: Array<string>, speedTime: number):number {
   let i = 0
   let timer = setInterval(() => {
     dom.innerHTML += code[i++]
@@ -29,4 +29,5 @@ export function pushCode(dom: Element, code: Array<string>, speedTime: number):v
       clearInterval(timer)
     }
   }, speedTime)
+  return timer
 }
