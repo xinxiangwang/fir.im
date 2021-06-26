@@ -144,6 +144,9 @@ main .section-1 .plane-wrapper .propeller {
 }
 
 main .section-1 .code {
+  opacity: 0;
+  -webkit-transition: opacity .5s;
+  transition: opacity .5s;
   position: absolute;
   left: 30px;
   bottom: 30px;
@@ -168,6 +171,10 @@ main .section-1 .code span {
   font-size: 24px;
   -webkit-animation: flashing .4s linear infinite forwards;
           animation: flashing .4s linear infinite forwards;
+}
+
+main .section-1.animate-out .code {
+  opacity: 0 !important;
 }
 
 main .section-1.animate-in .plane-wrapper {
@@ -276,6 +283,19 @@ main .section-2 .cols:nth-child(3) .front .front-2 {
   background-color: #8eb131;
 }
 
+main .section-2 .cols .front-1, main .section-2 .cols .front-2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: hidden;
+}
+
 main .section-2 .cols .back,
 main .section-2 .cols .front {
   position: absolute;
@@ -289,6 +309,25 @@ main .section-2 .cols .front {
   transition: all .6s;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
+  text-align: center;
+  color: white;
+}
+
+main .section-2 .cols .back .icon,
+main .section-2 .cols .front .icon {
+  font-size: 8.5em;
+  margin-bottom: 60px;
+}
+
+main .section-2 .cols .back .title,
+main .section-2 .cols .front .title {
+  font-size: 2em;
+  margin-bottom: 30px;
+}
+
+main .section-2 .cols .back .desc,
+main .section-2 .cols .front .desc {
+  font-size: 1em;
 }
 
 main .section-2 .cols .back {

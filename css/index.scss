@@ -126,6 +126,8 @@ main {
 
     // 代码
     .code {
+      opacity: 0;
+      transition: opacity .5s;
       position: absolute;
       left: 30px;
       bottom: 30px;
@@ -151,7 +153,9 @@ main {
       }
     }
 
-
+    &.animate-out .code {
+      opacity: 0 !important;
+    }
     &.animate-in .plane-wrapper {
       opacity: 1;
       left: 50%;
@@ -233,7 +237,12 @@ main {
           }
         }
       }
-
+      .front-1, .front-2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
       .back,
       .front {
         position: absolute;
@@ -244,6 +253,19 @@ main {
         transform-style: preserve-3d;
         transition: all .6s;
         backface-visibility: hidden;
+        text-align: center;
+        color: white;
+        .icon {
+          font-size: 8.5em;
+          margin-bottom: 60px;
+        }
+        .title {
+          font-size: 2em;
+          margin-bottom: 30px;
+        }
+        .desc {
+          font-size: 1em;
+        }
       }
 
       .back {

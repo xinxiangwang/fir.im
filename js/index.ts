@@ -34,6 +34,7 @@ class Page {
     } else {
       this.state = 6
     }
+    if (this.prevState === this.state) return
     this.changeView()
   }
 
@@ -41,6 +42,7 @@ class Page {
     if (this.isAnimation) return
     this.prevState = this.state
     this.state = this.state - 1 < 1 ? 1 : this.state - 1
+    if (this.prevState === this.state) return
     this.changeView()
   }
 
