@@ -1,4 +1,4 @@
-import { throttle, pushCode } from './utils.js'
+import { throttle, pushCode, makeImFirEl, sleep } from './utils.js'
 
 class Page {
   constructor() {
@@ -6,11 +6,13 @@ class Page {
     this.prevState = -1
     this.isAnimation = true
     this.pushCodeTimer = null
+    this.ImTimer = null
     this.nav = document.querySelector('#nav')
     this.main = document.querySelector('main')
     this.loadingBox = document.querySelector('.loading')
     this.sectionOne = document.querySelector('.section-1')
     this.sectionTwo = document.querySelector('.section-2')
+    this.ImFirElWrapper = document.querySelector('.imfir')
     this.changeView()
   }
   private isAnimation: boolean // 是否在执行动画，执行期间禁止触发翻页
@@ -22,9 +24,11 @@ class Page {
   private loadingBox: Element | null // 初始加载动画
   private sectionOne: Element | null
   private sectionTwo: Element | null
+  private ImFirElWrapper: Element | null
   private main: Element | null
 
   private pushCodeTimer: number | null
+  private ImTimer: number | null
 
   public next() {
     if (this.isAnimation) return
@@ -57,7 +61,7 @@ class Page {
 
   private showCode(wait: number) { // 光标跳动 wait s后开始显示代码
     const code = ["B", "e", "t", "a", "A", "p", "p", "H", "o", "s", "t", "<br/>",
-    "{", "<br/>", "   ", "r", "e", "t", "u", "r", "n", " ", "\"", "f", "i", "r", ".", "i", "m", "\"", "<br/>", "}"]
+      "{", "<br/>", "   ", "r", "e", "t", "u", "r", "n", " ", "\"", "f", "i", "r", ".", "i", "m", "\"", "<br/>", "}"]
     const dom = document.querySelector('.code > pre')
     if (dom) {
       setTimeout(() => {
@@ -161,9 +165,35 @@ class Page {
         break;
       case 5: // 第四页
         this.setMainClass()
+        if (this.ImFirElWrapper) {
+          this.ImFirElWrapper.innerHTML = ''
+        }
         break;
       case 6: // 第五页
         this.setMainClass()
+        const ImFirElWrapper = this.ImFirElWrapper
+        const cursor = document.querySelector('.cursor')
+        const sleepTime = 200
+        if (ImFirElWrapper) {
+          const [imFirChildOne, imFirChildTwo] = makeImFirEl();
+          setTimeout(async () => {
+            cursor?.classList.remove('finished')
+            for (let i = 0; i < imFirChildOne.length; i++) {
+              ImFirElWrapper.appendChild(imFirChildOne[i])
+              await sleep(sleepTime)
+            }
+            await sleep(500)
+            for (let i = imFirChildOne.length; i > 0; i--) {
+              ImFirElWrapper.removeChild(ImFirElWrapper.childNodes[ImFirElWrapper.childNodes.length - 1])
+              await sleep(sleepTime)
+            }
+            for (let i = 0; i < imFirChildTwo.length; i++) {
+              ImFirElWrapper.appendChild(imFirChildTwo[i])
+              await sleep(sleepTime)
+            }
+            cursor?.classList.add('finished')
+          }, 300)
+        }
         break;
       default:
     }
@@ -175,7 +205,7 @@ let page: Page
 (function () {
   page = new Page()
   // setTimeout(() => {
-    
+
   // }, 2600) // 扩散总时间2.8s 不能等完全扩散完毕才显示第一页
 })();
 
@@ -193,5 +223,32 @@ function pageState(e: WheelEvent) {
     isUp = false
   }
 }
+
+interface ExtraEvent extends EventTarget {
+  dataset: BrandItemDataSet
+}
+
+interface BrandItemDataSet {
+  item: string
+}
+
+// 第四页动画
+(function () {
+  const brandWrapperEl = document.querySelectorAll('.brand-wrapper > div')
+  const sectionFour = document.querySelector('.section-4')
+  if (!brandWrapperEl || !sectionFour) return
+  sectionFour.classList.add('active-jumei');
+  [...brandWrapperEl].forEach(brandItemEl => {
+    brandItemEl.addEventListener('mouseenter', function (e: Event) {
+
+      sectionFour.classList.forEach(className => {
+        if (className.startsWith('active')) {
+          sectionFour.classList.remove(className)
+        }
+      })
+      sectionFour.classList.add('active-' + (e.target as ExtraEvent).dataset.item)
+    })
+  })
+})();
 
 

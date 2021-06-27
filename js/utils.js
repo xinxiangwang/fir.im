@@ -32,3 +32,24 @@ export function pushCode(dom, code, speedTime) {
     }, speedTime);
     return timer;
 }
+export function makeImFirEl() {
+    const classArrOne = ['icon-i', 'icon-comma', 'icon-m', 'icon-f i-behind', 'icon-i', 'icon-r'];
+    const classArrTwo = ['icon-f', 'icon-i', 'icon-r', 'icon-comma trans', 'icon-i i-behind', 'icon-m'];
+    const classNameToEle = (classArr, tagName) => {
+        return classArr.map(className => {
+            const ele = document.createElement(tagName);
+            ele.className = className;
+            return ele;
+        });
+    };
+    const ImFirELOne = classNameToEle(classArrOne, 'i');
+    const ImFirELTwo = classNameToEle(classArrTwo, 'i');
+    return [ImFirELOne, ImFirELTwo];
+}
+export function sleep(time) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(true);
+        }, time);
+    });
+}

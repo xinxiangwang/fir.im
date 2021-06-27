@@ -1,15 +1,26 @@
-import { throttle, pushCode } from './utils.js';
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import { throttle, pushCode, makeImFirEl, sleep } from './utils.js';
 class Page {
     constructor() {
         this.state = 0;
         this.prevState = -1;
         this.isAnimation = true;
         this.pushCodeTimer = null;
+        this.ImTimer = null;
         this.nav = document.querySelector('#nav');
         this.main = document.querySelector('main');
         this.loadingBox = document.querySelector('.loading');
         this.sectionOne = document.querySelector('.section-1');
         this.sectionTwo = document.querySelector('.section-2');
+        this.ImFirElWrapper = document.querySelector('.imfir');
         this.changeView();
     }
     next() {
@@ -146,9 +157,35 @@ class Page {
                 break;
             case 5: // 第四页
                 this.setMainClass();
+                if (this.ImFirElWrapper) {
+                    this.ImFirElWrapper.innerHTML = '';
+                }
                 break;
             case 6: // 第五页
                 this.setMainClass();
+                const ImFirElWrapper = this.ImFirElWrapper;
+                const cursor = document.querySelector('.cursor');
+                const sleepTime = 200;
+                if (ImFirElWrapper) {
+                    const [imFirChildOne, imFirChildTwo] = makeImFirEl();
+                    setTimeout(() => __awaiter(this, void 0, void 0, function* () {
+                        cursor === null || cursor === void 0 ? void 0 : cursor.classList.remove('finished');
+                        for (let i = 0; i < imFirChildOne.length; i++) {
+                            ImFirElWrapper.appendChild(imFirChildOne[i]);
+                            yield sleep(sleepTime);
+                        }
+                        yield sleep(500);
+                        for (let i = imFirChildOne.length; i > 0; i--) {
+                            ImFirElWrapper.removeChild(ImFirElWrapper.childNodes[ImFirElWrapper.childNodes.length - 1]);
+                            yield sleep(sleepTime);
+                        }
+                        for (let i = 0; i < imFirChildTwo.length; i++) {
+                            ImFirElWrapper.appendChild(imFirChildTwo[i]);
+                            yield sleep(sleepTime);
+                        }
+                        cursor === null || cursor === void 0 ? void 0 : cursor.classList.add('finished');
+                    }), 300);
+                }
                 break;
             default:
         }
@@ -174,3 +211,21 @@ function pageState(e) {
         isUp = false;
     }
 }
+// 第四页动画
+(function () {
+    const brandWrapperEl = document.querySelectorAll('.brand-wrapper > div');
+    const sectionFour = document.querySelector('.section-4');
+    if (!brandWrapperEl || !sectionFour)
+        return;
+    sectionFour.classList.add('active-jumei');
+    [...brandWrapperEl].forEach(brandItemEl => {
+        brandItemEl.addEventListener('mouseenter', function (e) {
+            sectionFour.classList.forEach(className => {
+                if (className.startsWith('active')) {
+                    sectionFour.classList.remove(className);
+                }
+            });
+            sectionFour.classList.add('active-' + e.target.dataset.item);
+        });
+    });
+})();

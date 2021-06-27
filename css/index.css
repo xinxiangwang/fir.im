@@ -3,6 +3,10 @@
   margin: 0;
 }
 
+body {
+  color: #333;
+}
+
 #nav {
   width: 100%;
   position: fixed;
@@ -85,6 +89,18 @@
   opacity: 0;
 }
 
+.flex-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 main {
   width: 100vh;
   height: 100vh;
@@ -162,7 +178,7 @@ main .section-1 .code pre {
   padding: 0;
   border: none;
   background: 0 0;
-  font-family: 'Roboto Slab','Helvetica Neue',Helvetica,'Hiragino Sans GB',Arial,sans-serif;
+  font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', Arial, sans-serif;
 }
 
 main .section-1 .code span {
@@ -283,7 +299,8 @@ main .section-2 .cols:nth-child(3) .front .front-2 {
   background-color: #8eb131;
 }
 
-main .section-2 .cols .front-1, main .section-2 .cols .front-2 {
+main .section-2 .cols .front-1,
+main .section-2 .cols .front-2 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -386,12 +403,190 @@ main .section-4 {
   background-color: #d85245;
   -webkit-transition: top .5s, background-color .8s;
   transition: top .5s, background-color .8s;
+  color: white;
+}
+
+main .section-4.active-jumei {
+  background-color: #3c81df;
+}
+
+main .section-4.active-jumei .jumei .logo {
+  color: #3c81df;
+  background-color: #fff;
+}
+
+main .section-4.active-jumei .jumei p.words {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+
+main .section-4.active-jiecao {
+  background-color: #e3a520;
+}
+
+main .section-4.active-jiecao .jiecao .logo {
+  color: #e3a520;
+  background-color: #fff;
+}
+
+main .section-4.active-jiecao .jiecao p.words {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+
+main .section-4.active-jd {
+  background-color: #d85245;
+}
+
+main .section-4.active-jd .jd .logo {
+  color: #d85245;
+  background-color: #fff;
+}
+
+main .section-4.active-jd .jd p.words {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+
+main .section-4.active-ebaoyang {
+  background-color: #11b076;
+}
+
+main .section-4.active-ebaoyang .ebaoyang .logo {
+  color: #11b076;
+  background-color: #fff;
+}
+
+main .section-4.active-ebaoyang .ebaoyang p.words {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+
+main .section-4.active-xiachufang {
+  background-color: #9E5C42;
+}
+
+main .section-4.active-xiachufang .xiachufang .logo {
+  color: #9E5C42;
+  background-color: #fff;
+}
+
+main .section-4.active-xiachufang .xiachufang p.words {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+
+main .section-4 > div {
+  width: 100%;
+  text-align: center;
+}
+
+main .section-4 .title {
+  display: inline-block;
+  margin-bottom: 140px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 50px;
+  font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', Arial, sans-serif;
+}
+
+main .section-4 .brand-wrapper {
+  margin: 0 auto 60px;
+  max-width: 1020px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  position: relative;
+}
+
+main .section-4 .brand-wrapper .brand-item {
+  width: 120px;
+  height: 120px;
+}
+
+main .section-4 .brand-wrapper .brand-item .logo {
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  border-radius: 50%;
+  border: 2px solid white;
+  margin-bottom: 80px;
+  cursor: pointer;
+  font-size: 78px;
+  text-align: center;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+main .section-4 .brand-wrapper .brand-item.xiachufang .logo {
+  font-size: 54px;
+}
+
+main .section-4 .brand-wrapper .brand-item .words {
+  position: absolute;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  font-size: 20px;
+  -webkit-transform: translateY(40px);
+          transform: translateY(40px);
+  -webkit-transition: -webkit-transform .4s;
+  transition: -webkit-transform .4s;
+  transition: transform .4s;
+  transition: transform .4s, -webkit-transform .4s;
 }
 
 main .section-5 {
   background-color: #FFD200;
   -webkit-transition: top .5s;
   transition: top .5s;
+}
+
+main .section-5 .imfir {
+  display: inline-block;
+}
+
+main .section-5 .imfir i {
+  display: inline-block;
+  margin: 0 2px;
+  vertical-align: middle;
+  font-size: 80px;
+}
+
+main .section-5 .imfir i.i-behind {
+  margin-left: 16px;
+}
+
+main .section-5 .imfir .icon-comma.trans {
+  overflow: hidden;
+  height: 16px;
+  vertical-align: bottom;
+}
+
+main .section-5 .cursor {
+  display: inline-block;
+  margin-left: 4px;
+  width: 2px;
+  height: 100px;
+  background: #000;
+  content: ' ';
+  vertical-align: middle;
+  -webkit-transition: all .35s;
+  transition: all .35s;
+  -webkit-animation: flashing .6s linear infinite forwards;
+          animation: flashing .6s linear infinite forwards;
+}
+
+main .section-5 .cursor.finished {
+  display: none;
 }
 
 main.active-1 .section-1 {

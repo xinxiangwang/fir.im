@@ -7,6 +7,10 @@ $SECTION_ONE_FLY_OUT: 1s;
   margin: 0;
 }
 
+body {
+  color: #333;
+}
+
 #nav {
   width: 100%;
   position: fixed;
@@ -72,6 +76,12 @@ $SECTION_ONE_FLY_OUT: 1s;
 
 .fade-out {
   opacity: 0;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 main {
@@ -142,20 +152,21 @@ main {
         padding: 0;
         border: none;
         background: 0 0;
-        font-family: 'Roboto Slab','Helvetica Neue',Helvetica,'Hiragino Sans GB',Arial,sans-serif;
+        font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', Arial, sans-serif;
       }
 
       span {
         border: 1px solid black;
         margin-left: 4px;
         font-size: 24px;
-        animation: flashing .4s linear infinite forwards; 
+        animation: flashing .4s linear infinite forwards;
       }
     }
 
     &.animate-out .code {
       opacity: 0 !important;
     }
+
     &.animate-in .plane-wrapper {
       opacity: 1;
       left: 50%;
@@ -174,6 +185,7 @@ main {
   .section-2 {
     display: flex;
     z-index: 66;
+
     .cols {
       position: relative;
       flex: 1;
@@ -183,9 +195,11 @@ main {
 
       &:nth-child(1) {
         transition-delay: 0s;
+
         .back {
           transition-delay: 0s;
         }
+
         .front {
           transition-delay: 0s;
 
@@ -202,9 +216,11 @@ main {
 
       &:nth-child(2) {
         transition-delay: .2s;
+
         .back {
           transition-delay: .2s;
         }
+
         .front {
           transition-delay: .2s;
 
@@ -221,9 +237,11 @@ main {
 
       &:nth-child(3) {
         transition-delay: .3s;
+
         .back {
           transition-delay: .3s;
         }
+
         .front {
           transition-delay: .3s;
 
@@ -237,12 +255,15 @@ main {
           }
         }
       }
-      .front-1, .front-2 {
+
+      .front-1,
+      .front-2 {
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
       }
+
       .back,
       .front {
         position: absolute;
@@ -255,14 +276,17 @@ main {
         backface-visibility: hidden;
         text-align: center;
         color: white;
+
         .icon {
           font-size: 8.5em;
           margin-bottom: 60px;
         }
+
         .title {
           font-size: 2em;
           margin-bottom: 30px;
         }
+
         .desc {
           font-size: 1em;
         }
@@ -320,10 +344,12 @@ main {
     &.animate-out-4 {
       top: 0;
       background-color: unset;
+
       .cols {
         transform: translateY(-100%);
       }
     }
+
     // &.animate-in-4 {
     //   top: 0;
     //   background-color: unset;
@@ -348,12 +374,187 @@ main {
   .section-4 {
     background-color: #d85245;
     transition: top .5s, background-color .8s;
+    color: white;
+
+    &.active-jumei {
+      background-color: #3c81df;
+
+      .jumei {
+        .logo {
+          color: #3c81df;
+          background-color: #fff;
+        }
+
+        p.words {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+
+    &.active-jiecao {
+      background-color: #e3a520;
+
+      .jiecao {
+        .logo {
+          color: #e3a520;
+          background-color: #fff;
+        }
+
+        p.words {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+
+    &.active-jd {
+      background-color: #d85245;
+
+      .jd {
+        .logo {
+          color: #d85245;
+          background-color: #fff;
+        }
+
+        p.words {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+
+    &.active-ebaoyang {
+      background-color: #11b076;
+
+      .ebaoyang {
+        .logo {
+          color: #11b076;
+          background-color: #fff;
+        }
+
+        p.words {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+
+    &.active-xiachufang {
+      background-color: #9E5C42;
+
+      .xiachufang {
+        .logo {
+          color: #9E5C42;
+          background-color: #fff;
+        }
+
+        p.words {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+
+    >div {
+      width: 100%;
+      text-align: center;
+    }
+
+    .title {
+      display: inline-block;
+      margin-bottom: 140px;
+      text-align: center;
+      font-weight: 400;
+      font-size: 50px;
+      font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', Arial, sans-serif;
+    }
+
+    .brand-wrapper {
+      margin: 0 auto 60px;
+      max-width: 1020px;
+      display: flex;
+      justify-content: space-around;
+      position: relative;
+
+      .brand-item {
+        width: 120px;
+        height: 120px;
+
+        .logo {
+          display: inline-block;
+          width: 120px;
+          height: 120px;
+          line-height: 120px;
+          border-radius: 50%;
+          border: 2px solid white;
+          margin-bottom: 80px;
+          cursor: pointer;
+          font-size: 78px;
+          text-align: center;
+          transition: all .3s;
+        }
+        &.xiachufang .logo {
+          font-size: 54px;
+        }
+        .words {
+          position: absolute;
+          left: 0;
+          right: 0;
+          opacity: 0;
+          font-size: 20px;
+          transform: translateY(40px);
+          transition: transform .4s;
+        }
+      }
+    }
   }
 
   // 第五页动画
   .section-5 {
     background-color: #FFD200;
     transition: top .5s;
+
+    .imfir {
+      display: inline-block;
+      i {
+        display: inline-block;
+        margin: 0 2px;
+        vertical-align: middle;
+        font-size: 80px;
+
+        &.i-behind {
+          margin-left: 16px;
+        }
+      }
+
+      .icon-comma {
+        &.trans {
+          overflow: hidden;
+          height: 16px;
+          vertical-align: bottom;
+        }
+      }
+
+      &.finished {
+
+      }
+    }
+
+    .cursor {
+      display: inline-block;
+      margin-left: 4px;
+      width: 2px;
+      height: 100px;
+      background: #000;
+      content: ' ';
+      vertical-align: middle;
+      transition: all .35s;
+      animation: flashing .6s linear infinite forwards;
+      &.finished {
+        display: none;
+      }
+    }
   }
 
   &.active-1 {
@@ -364,26 +565,32 @@ main {
         opacity: 1
       }
     }
+
     .section-2 {
       top: 0;
       z-index: 66
     }
   }
-  &.active-2, &.active-3 {
+
+  &.active-2,
+  &.active-3 {
     .section-2 {
       top: 0;
       z-index: 99
     }
   }
+
   &.active-2 {
     .section-2 {
       background-color: black;
     }
   }
+
   &.active-3 {
     .section-2 {
-      background-color: rgba(0,0,0,0);
+      background-color: rgba(0, 0, 0, 0);
     }
+
     .section-3 {
       z-index: 66;
       top: 0;
@@ -395,6 +602,7 @@ main {
       z-index: 99;
       top: 0;
     }
+
     .section-4 {
       z-index: 100;
       top: 100%;
@@ -406,10 +614,12 @@ main {
       z-index: 66;
       top: 0;
     }
+
     .section-4 {
       z-index: 99;
       top: 0;
     }
+
     .section-5 {
       z-index: 100;
       top: 100%;
@@ -421,6 +631,7 @@ main {
       z-index: 66;
       top: 0;
     }
+
     .section-5 {
       z-index: 99;
       top: 0;
@@ -478,6 +689,7 @@ main {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
